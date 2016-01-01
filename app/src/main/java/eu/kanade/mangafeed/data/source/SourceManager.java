@@ -11,6 +11,7 @@ import eu.kanade.mangafeed.data.source.online.english.Batoto;
 import eu.kanade.mangafeed.data.source.online.english.Kissmanga;
 import eu.kanade.mangafeed.data.source.online.english.Mangafox;
 import eu.kanade.mangafeed.data.source.online.english.Mangahere;
+import eu.kanade.mangafeed.data.source.online.english.Mangapanda;
 
 public class SourceManager {
 
@@ -18,6 +19,7 @@ public class SourceManager {
     public static final int MANGAHERE = 2;
     public static final int MANGAFOX = 3;
     public static final int KISSMANGA = 4;
+    public static final int MANGAPANDA = 5;
 
     private HashMap<Integer, Source> sourcesMap;
     private Context context;
@@ -46,6 +48,8 @@ public class SourceManager {
                 return new Mangafox(context);
             case KISSMANGA:
                 return new Kissmanga(context);
+            case MANGAPANDA:
+                return new Mangapanda(context);
         }
 
         return null;
@@ -56,6 +60,7 @@ public class SourceManager {
         sourcesMap.put(MANGAHERE, createSource(MANGAHERE));
         sourcesMap.put(MANGAFOX, createSource(MANGAFOX));
         sourcesMap.put(KISSMANGA, createSource(KISSMANGA));
+        sourcesMap.put(MANGAPANDA, createSource(MANGAPANDA));
     }
 
     public List<Source> getSources() {
