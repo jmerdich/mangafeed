@@ -48,7 +48,7 @@ public class WebtoonAdapter extends BaseEasyRecyclerAdapter<Page> {
     }
 
     @LayoutId(R.layout.item_webtoon_reader)
-    static class ImageViewHolder extends ItemViewHolder<Page> {
+    static public class ImageViewHolder extends ItemViewHolder<Page> {
 
         @ViewId(R.id.page_image_view) SubsamplingScaleImageView imageView;
         @ViewId(R.id.progress) ProgressBar progressBar;
