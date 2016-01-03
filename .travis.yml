@@ -24,4 +24,4 @@ addons:
     s3_region: "us-east-1"
     debug: true
     paths:
-    - ./app/build/outputs/apk/*.apk
+    - ./app/build/outputs/apk/
