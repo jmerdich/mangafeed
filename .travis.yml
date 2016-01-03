@@ -35,3 +35,5 @@ addons:
     debug: true
     paths:
     - ./app/build/outputs/apk/
+    target_paths:
+    - $TRAVIS_REPO_SLUG/$TRAVIS_BRANCH/BUILD_$TRAVIS_BUILD_NUMBER/
