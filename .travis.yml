@@ -19,6 +19,16 @@ before_script:
 #Build, and run tests
 script: "./gradlew build testDebug"
 sudo: false
+
+# cache gradle deps (important considering travis tends to fail here)
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+# upload an APK afterwards
 addons:
   artifacts:
     s3_region: "us-east-1"
