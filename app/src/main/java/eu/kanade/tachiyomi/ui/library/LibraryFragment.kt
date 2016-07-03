@@ -157,6 +157,7 @@ class LibraryFragment : BaseRxFragment<LibraryPresenter>(), ActionMode.Callback 
         val filterUnreadItem = menu.findItem(R.id.action_filter_unread)
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
+        val filterButton = menu.findItem(R.id.action_filter)
 
         if (!query.isNullOrEmpty()) {
             searchItem.expandActionView()
@@ -166,6 +167,12 @@ class LibraryFragment : BaseRxFragment<LibraryPresenter>(), ActionMode.Callback 
 
         filterDownloadedItem.isChecked = isFilterDownloaded
         filterUnreadItem.isChecked = isFilterUnread
+
+        filterButton.setIcon(
+                if (isFilterDownloaded || isFilterUnread)
+                    R.drawable.ic_filter_list_active_white_24dp
+                else
+                    R.drawable.ic_filter_list_inactive_white_24dp)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {

@@ -116,8 +116,18 @@ class ChaptersFragment : BaseRxFragment<ChaptersPresenter>(), ActionMode.Callbac
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.chapters, menu)
-        menu.findItem(R.id.action_filter_unread).isChecked = presenter.onlyUnread()
-        menu.findItem(R.id.action_filter_downloaded).isChecked = presenter.onlyDownloaded()
+
+        val isFilterUnread = presenter.onlyUnread()
+        val isFilterDownloaded = presenter.onlyDownloaded()
+
+        menu.findItem(R.id.action_filter_unread).isChecked = isFilterUnread
+        menu.findItem(R.id.action_filter_downloaded).isChecked = isFilterDownloaded
+
+        menu.findItem(R.id.action_filter).setIcon(
+                if (isFilterDownloaded || isFilterUnread)
+                    R.drawable.ic_filter_list_active_white_24dp
+                else
+                    R.drawable.ic_filter_list_inactive_white_24dp)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -126,12 +136,12 @@ class ChaptersFragment : BaseRxFragment<ChaptersPresenter>(), ActionMode.Callbac
             R.id.manga_download -> showDownloadDialog()
             R.id.action_sorting_mode -> showSortingDialog()
             R.id.action_filter_unread -> {
-                item.isChecked = !item.isChecked
-                presenter.setReadFilter(item.isChecked)
+                presenter.setReadFilter(!item.isChecked)
+                activity.supportInvalidateOptionsMenu()
             }
             R.id.action_filter_downloaded -> {
-                item.isChecked = !item.isChecked
-                presenter.setDownloadedFilter(item.isChecked)
+                presenter.setDownloadedFilter(!item.isChecked)
+                activity.supportInvalidateOptionsMenu()
             }
             R.id.action_filter_empty -> {
                 presenter.removeFilters()
